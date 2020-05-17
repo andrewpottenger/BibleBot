@@ -28,11 +28,11 @@ const getReferenceLink = function(verse) {
   return `https://biblegateway.com/bible?passage=${verse}&version=${version}`;
 }
 
-//osis: "John.3.1-John.3.2",
-// osis: "John.3.1-John.3.4"
-// osis: "John.3.1
-// osis: John.3.4"
-
+// verse formats supported:
+// osis: "John.1",
+// osis: "John.1.1",
+// osis: "John.1.1-John.1.2",
+// TODO: osis: "John.1.1,John.1.3",
 const getVerseRef = function(message) {
   if (!message) return;
   // parse reference https://github.com/openbibleinfo/Bible-Passage-Reference-Parser
@@ -42,23 +42,10 @@ const getVerseRef = function(message) {
   const verseRefList = result.components.filter(function(component) {
     return component.type === 'osis';
   });
+
   const verseRef = verseRefList[0] && verseRefList[0].osis;
   if (!verseRef) return;
   return verseRef;
-}
-
-const getMultiVerseArray = function(verses) {
-//   let verseArr = [];
-//   if (verseRefs.length === 1) {
-//     // TODO: support chapter or multi-verse reference
-//   // split to ensure single verse instead of chapter or multi-verse reference, which is supported by osis but not the bot atm
-//     verseArr = verseRef && verseRef.split('.');
-//     // check for a full verse reference
-//     if (!verseArr || !verseArr[0]) return;
-//     return verseArr;
-//   } else if (verseRefs.length > 1) {
-//       verseRefs.join(',');
-//   }
 }
 
 const getVerseArray = function(verseRef) {
@@ -71,39 +58,18 @@ const getVerseArray = function(verseRef) {
   return verseArr;
 }
 
-const getDisplayVerse = function(verseRef) {
-  const verseArr = getVerseArray(verseRef);
-  let prependText = '';
-  let addVerse = ' ';
-
-  // book chapter:verse 3
-  // ... book chapter (1) 2
-  // ... book (chapter 1) 1
-  if (verseArr.length === 1) {
-    //prependText = '... ';
-  } else if (verseArr.length === 2) {
-    //prependText = '... ';
-  } else if (verseArr.length === 3) {
-    addVerse = ':' + verseArr[2];
-  }
-
-  const book = booksMap[verseArr[0]] && booksMap[verseArr[0]].name;
-  const verseAbv = getBibleVersionAbv();
-  if (!book) return;
-  return `${prependText}${book} ${verseArr[1]}${addVerse} (${verseAbv})`;
-}
-
-const formatVerseForAPI = function(verse) {
-  const verseArr = getVerseArray(verse);
+// formats a single verse key to map to API keys
+const formatVerseForAPI = function(singleVerse) {
+  const verseArr = getVerseArray(singleVerse);
   // prepare API for call based on input, always show the first verse, , provide link to full scrpture
   // 1: ... book (chapter 1)
   // 2: ... book chapter (1)
   // 3: book chapter:verse
   if (verseArr.length === 1) {
-    verseArr.push('1');
-    verseArr.push('1');
+    verseArr.push('1'); // push chapter
+    verseArr.push('1'); // push verse
   } else if (verseArr.length === 2) {
-    verseArr.push('1');
+    verseArr.push('1'); // push verse
   }
 
   if (!verseArr) return;
@@ -112,8 +78,46 @@ const formatVerseForAPI = function(verse) {
   // get bookID to replace osis book key to the bookID defined by api.scripture.api.bible
   const bookId = booksMap[book] && booksMap[book].bookId;
   if (!bookId) return;
-  const formattedVerseRef = verse.replace(book, bookId);
+  const formattedVerseRef = verseArr.join('.').replace(book, bookId);
   return formattedVerseRef;
+}
+
+const formatSingleVerseForLink = function(singleVerseRef) {
+  const verseArr = getVerseArray(singleVerseRef);
+  const book = booksMap[verseArr[0]] && booksMap[verseArr[0]].name ? booksMap[verseArr[0]].name : null;
+  // required is at least a bible book
+  if (!book) return;
+
+  // not required, a chapter
+  const chapter = verseArr[1] ? verseArr[1] : '';
+
+  // not required, a verse
+  const colon = verseArr[2] ? ':' : '' ;
+  const verse = verseArr[2] ? verseArr[2] : '' ;
+
+  return `${book} ${chapter}${colon}${verse}`;
+}
+
+// verse formats supported:
+// osis: "John.1",
+// osis: "John.1.1",
+// osis: "John.1.1-John.1.2",
+// TODO: osis: "John.1.1,John.1.3",
+const getDisplayVerse = function(verseRef) {
+  const verseAbv = getBibleVersionAbv();
+  const verseArr = verseRef.split('-');
+  var displayText = '';
+
+  if (verseArr.length > 1) {
+    var displayArr = [];
+    verseArr.forEach(function(verse) {
+      displayArr.push(formatSingleVerseForLink(verse));
+    });
+    displayText = displayArr.join('-')
+  } else {
+    displayText = formatSingleVerseForLink(verseArr[0]);
+  }
+  return  `${displayText} (${verseAbv})`;
 }
 
 const getVerse = function(message, say) {
@@ -121,7 +125,12 @@ const getVerse = function(message, say) {
   const verseRef = getVerseRef(message);
   if (!verseRef) return;
   // use the first verse for request to keep count low, provide link to full scrpture
-  const verseForAPI = formatVerseForAPI(verseRef);
+  const versesRefArr = verseRef && verseRef.split('-');
+  const singleVerseRef = versesRefArr[0];
+  if (!singleVerseRef[0]) return;
+
+  // formats a single verse key to map to API keys
+  const verseForAPI = formatVerseForAPI(singleVerseRef);
   const options = {
       url: `https://api.scripture.api.bible/v1/bibles/${versionId}/passages/${verseForAPI}?content-type=text&include-notes=false&include-titles=false&include-chapter-numbers=false&include-verse-numbers=true&include-verse-spans=false&use-org-id=false`,
       method: 'GET',
@@ -135,9 +144,8 @@ const getVerse = function(message, say) {
       const results = JSON.parse(response.body);
       const rawVerseContent = results.data.content;
       if (!rawVerseContent) return;
-      const verseContent = rawVerseContent.split(']');
-      const verse = (verseContent.length > 1) ? verseContent[1].trim() : verseContent.trim();
-      const verseEnd = (verseContent.length > 2) ? '] ... :book: ' : ' :book: ';
+      const verse = rawVerseContent.trim();
+      const verseEnd = (verseRef.split('.').length < 3 || versesRefArr.length > 1) ? '...\n :book: ' : '\n:book: ';
 
       if (verse) {
         const refLink = getReferenceLink(verseRef);
