@@ -1,0 +1,24 @@
+{
+  "KJV": {
+    "id": "de4e12af7f28f599-02",
+    "name": "King James (Authorised) Version",
+    "nameLocal": "King James Version",
+    "abbreviation": "engKJV",
+    "abbreviationLocal": "KJV",
+    "description": "Protestant",
+    "language": "English",
+    "type": "text",
+    "updatedAt": "2020-02-25T07:04:57.000Z"
+  },
+  "ASV": {
+    "id": "06125adad2d5898a-01",
+    "name": "The Holy Bible, American Standard Version",
+    "nameLocal": "The Holy Bible, American Standard Version",
+    "abbreviation": "ASV",
+    "abbreviationLocal": "ASV",
+    "description": "Bible",
+    "language": "English",
+    "type": "text",
+    "updatedAt": "2020-04-17T15:19:46.000Z"
+  }
+}

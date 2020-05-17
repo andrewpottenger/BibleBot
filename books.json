@@ -1,0 +1,332 @@
+{
+  "Gen": {
+    "name": "Genesis",
+    "bookId": "GEN",
+    "abv": ["genesis", "gen", "ge", "gn"]
+  },
+  "Exod": {
+    "name": "Exodus",
+    "bookId": "EXO",
+    "abv": ["exodus", "exo", "ex", "exod"]
+  },
+  "Lev": {
+    "name": "Leviticus",
+    "bookId": "LEV",
+    "abv": ["leviticus", "lev", "le", "lv"]
+  },
+  "Num": {
+    "name": "Numbers",
+    "bookId": "NUM",
+    "abv": ["numbers", "num", "nu", "nm", "nb"]
+  },
+  "Deut": {
+    "name": "Deuteronomy",
+    "bookId": "DEU",
+    "abv": ["deuteronomy", "deut", "dt"]
+  },
+  "Josh": {
+    "name": "Joshua",
+    "bookId": "JOS",
+    "abv": ["joshua", "josh", "jos", "jsh"]
+  },
+  "Judg": {
+    "name": "Judges",
+    "bookId": "JDG",
+    "abv": ["judges", "judg", "jdg", "jg", "jdgs"]
+  },
+  "Ruth": {
+    "name": "Ruth",
+    "bookId": "RUT",
+    "abv": ["ruth", "rth", "ru"]
+  },
+  "1Sam": {
+    "name": "1 Samuel",
+    "bookId": "1SA",
+    "abv": ["1 samuel", "1 sam", "1 sa", "1samuel", "1s", "i sa", "1 sm", "1sa", "i sam", "1sam", "i samuel", "1st samuel", "first samuel"]
+  },
+  "2Sam": {
+    "name": "2 Samuel",
+    "bookId": "2SA",
+    "abv": ["2 samuel", "2 sam", "2 sa", "2s", "ii sa", "2 sm", "2sa", "ii sam", "2sam", "ii samuel", "2samuel", "2nd samuel", "second samuel"]
+  },
+  "1Kgs": {
+    "name": "1 Kings",
+    "bookId": "1KI",
+    "abv": ["1 kings", "1 kgs", "1 ki", "1k", "i kgs", "1kgs", "i ki", "1ki", "i kings", "1kings", "1st kgs", "1st kings", "first kings", "first kgs", "1kin"]
+  },
+  "2Kgs": {
+    "name": "2 Kings",
+    "bookId": "2KI",
+    "abv": ["2 kings", "2 kgs", "2 ki", "2k", "ii kgs", "2kgs", "ii ki", "2ki", "ii kings", "2kings", "2nd kgs", "2nd kings", "second kings", "second kgs", "2kin"]
+  },
+  "1Chr": {
+    "name": "1 Chronicles",
+    "bookId": "1CH",
+    "abv": ["1 chronicles", "1 chron", "1 ch", "i ch", "1ch", "1 chr", "i chr", "1chr", "i chron", "1chron", "i chronicles", "1chronicles", "1st chronicles", "first chronicles"]
+  },
+  "2Chr": {
+    "name": "2 Chronicles",
+    "bookId": "2CH",
+    "abv": ["2 chronicles", "2 chron", "2 ch", "ii ch", "2ch", "ii chr", "2chr", "ii chron", "2chron", "ii chronicles", "2chronicles", "2nd chronicles", "second chronicles"]
+  },
+  "Ezra": {
+    "name": "Ezra",
+    "bookId": "EZR",
+    "abv": ["ezra", "ezra", "ezr"]
+  },
+  "Neh": {
+    "name": "Nehemiah",
+    "bookId": "NEH",
+    "abv": ["nehemiah", "neh", "ne"]
+  },
+  "Esth": {
+    "name": "Esther",
+    "bookId": "EST",
+    "abv": ["esther", "esth", "es"]
+  },
+  "Job": {
+    "name": "Job",
+    "bookId": "JOB",
+    "abv": ["job", "jb"]
+  },
+  "Ps": {
+    "name": "Psalm",
+    "bookId": "PSA",
+    "abv": ["psalm", "pslm", "ps", "psalms", "psa", "psm", "pss"]
+  },
+  "Prov": {
+    "name": "Proverbs",
+    "bookId": "PRO",
+    "abv": ["proverbs", "prov", "pr", "prv"]
+  },
+  "Eccl": {
+    "name": "Ecclesiastes",
+    "bookId": "ECC",
+    "abv": ["ecclesiastes", "eccles", "ec", "ecc", "qoh", "qoheleth"]
+  },
+  "Song": {
+    "name": "Song of Solomon",
+    "bookId": "SNG",
+    "abv": ["song of solomon", "song", "so", "canticle of canticles", "canticles", "song of songs", "sos"]
+  },
+  "Isa": {
+    "name": "Isaiah",
+    "bookId": "ISA",
+    "abv": ["isaiah", "isa", "is"]
+  },
+  "Jer": {
+    "name": "Jeremiah",
+    "bookId": "JER",
+    "abv": ["jeremiah", "jer", "je", "jr"]
+  },
+  "Lam": {
+    "name": "Lamentations",
+    "bookId": "LAM",
+    "abv": ["lamentations", "lam", "la"]
+  },
+  "Ezek": {
+    "name": "Ezekiel",
+    "bookId": "EZK",
+    "abv": ["ezekiel", "ezek", "eze", "ezk"]
+  },
+  "Dan": {
+    "name": "Daniel",
+    "bookId": "DAN",
+    "abv": ["daniel", "dan", "da", "dn"]
+  },
+  "Hos": {
+    "name": "Hosea",
+    "bookId": "HOS",
+    "abv": ["hosea", "hos", "ho"]
+  },
+  "Joel": {
+    "name": "Joel",
+    "bookId": "JOL",
+    "abv": ["joel", "joe", "jl"]
+  },
+  "Amos": {
+    "name": "Amos",
+    "bookId": "AMO",
+    "abv": ["amos", "am"]
+  },
+  "Obad": {
+    "name": "Obadiah",
+    "bookId": "OBA",
+    "abv": ["obadiah", "obad", "ob"]
+  },
+  "Jonah": {
+    "name": "Jonah",
+    "bookId": "JON",
+    "abv": ["jonah", "jnh", "jon"]
+  },
+  "Mic": {
+    "name": "Micah",
+    "bookId": "MIC",
+    "abv": ["micah", "mic"]
+  },
+  "Nah": {
+    "name": "Nahum",
+    "bookId": "NAM",
+    "abv": ["nahum", "nah", "na"]
+  },
+  "Hab": {
+    "name": "Habakkuk",
+    "bookId": "HAB",
+    "abv": ["habakkuk", "hab", "hab"]
+  },
+  "Zeph": {
+    "name": "Zephaniah",
+    "bookId": "ZEP",
+    "abv": ["zephaniah", "zeph", "zep", "zp"]
+  },
+  "Hag": {
+    "name": "Haggai",
+    "bookId": "HAG",
+    "abv": ["haggai", "hag", "hg"]
+  },
+  "Zech": {
+    "name": "Zechariah",
+    "bookId": "ZEC",
+    "abv": ["zechariah", "zech", "zec", "zc"]
+  },
+  "Mal": {
+    "name": "Malachi",
+    "bookId": "MAL",
+    "abv": ["malachi", "mal", "mal", "ml"]
+  },
+  "Matt": {
+    "name": "Matthew",
+    "bookId": "MAT",
+    "abv": ["matthew", "matt", "mt"]
+  },
+  "Mark": {
+    "name": "Mark",
+    "bookId": "MRK",
+    "abv": ["mark", "mrk", "mk", "mr"]
+  },
+  "Luke": {
+    "name": "Luke",
+    "bookId": "LUK",
+    "abv": ["luke", "luk", "lk"]
+  },
+  "John": {
+    "name": "John",
+    "bookId": "JHN",
+    "abv": ["john", "jn", "jhn"]
+  },
+  "Acts": {
+    "name": "Acts",
+    "bookId": "ACT",
+    "abv": ["acts", "ac"]
+  },
+  "Rom": {
+    "name": "Romans",
+    "bookId": "ROM",
+    "abv": ["romans", "rom", "ro", "rm"]
+  },
+  "1Cor": {
+    "name": "1 Corinthians",
+    "bookId": "1CO",
+    "abv": ["1 corinthians", "1 cor", "1 co", "i co", "1co", "i cor", "1cor", "i corinthians", "1corinthians", "1st corinthians", "first corinthians"]
+  },
+  "2Cor": {
+    "name": "2 Corinthians",
+    "bookId": "2CO",
+    "abv": ["2 corinthians", "2 cor", "2 co", "ii co", "2co", "ii cor", "2cor", "ii corinthians", "2corinthians", "2nd corinthians", "second corinthians"]
+  },
+  "Gal": {
+    "name": "Galatians",
+    "bookId": "GAL",
+    "abv": ["galatians", "gal", "ga"]
+  },
+  "Eph": {
+    "name": "Ephesians",
+    "bookId": "EPH",
+    "abv": ["ephesians", "ephes", "eph"]
+  },
+  "Phil": {
+    "name": "Philippians",
+    "bookId": "PHP",
+    "abv": ["philippians", "phil", "php"]
+  },
+  "Col": {
+    "name": "Colossians",
+    "bookId": "COL",
+    "abv": ["colossians", "col", "col"]
+  },
+  "1Thess": {
+    "name": "1 Thessalonians",
+    "bookId": "1TH",
+    "abv": ["1 thessalonians", "1 thess", "1 th", "i th", "1th", "i thes", "1thes", "i thess", "1thess", "i thessalonians", "1thessalonians", "1st thessalonians", "first thessalonians"]
+  },
+  "2Thess": {
+    "name": "2 Thessalonians",
+    "bookId": "2TH",
+    "abv": ["2 thessalonians", "2 thess", "2 th", "ii th", "2th", "ii thes", "2thes", "ii thess", "2thess", "ii thessalonians", "2thessalonians", "2nd thessalonians", "second thessalonians"]
+  },
+  "1Tim": {
+    "name": "1 Timothy",
+    "bookId": "1TI",
+    "abv": ["1 timothy", "1 tim", "1 ti", "i ti", "1ti", "i tim", "1tim", "i timothy", "1timothy", "1st timothy", "first timothy"]
+  },
+  "2Tim": {
+    "name": "2 Timothy",
+    "bookId": "2TI",
+    "abv": ["2 timothy", "2 tim", "2 ti", "ii ti", "2ti", "ii tim", "2tim", "ii timothy", "2timothy", "2nd timothy", "second timothy"]
+  },
+  "Titus": {
+    "name": "Titus",
+    "bookId": "TIT",
+    "abv": ["titus", "tit"]
+  },
+  "Phlm": {
+    "name": "Philemon",
+    "bookId": "PHM",
+    "abv": ["philemon", "philem", "phm"]
+  },
+  "Heb": {
+    "name": "Hebrews",
+    "bookId": "HEB",
+    "abv": ["hebrews", "heb"]
+  },
+  "JAS": {
+    "name": "James",
+    "bookId": "JAS",
+    "abv": ["james", "jas", "jm"]
+  },
+  "1Pet": {
+    "name": "1 Peter",
+    "bookId": "1PE",
+    "abv": ["1 peter", "1 pet", "1 pe", "i pe", "1pe", "i pet", "1pet", "i pt", "1 pt", "1pt", "i peter", "1peter", "1st peter", "first peter"]
+  },
+  "2Pet": {
+    "name": "2 Peter",
+    "bookId": "2PE",
+    "abv": ["2 peter", "2 pet", "2 pe", "ii pe", "2pe", "ii pet", "2pet", "ii pt", "2 pt", "2pt", "ii peter", "2peter", "2nd peter", "second peter"]
+  },
+  "1John": {
+    "name": "1 John",
+    "bookId": "1JN",
+    "abv": ["1 john", "1 jn", "i jn", "1jn", "i jo", "1jo", "i joh", "1joh", "i jhn", "1 jhn", "1jhn", "i john", "1john", "1st john", "first john"]
+  },
+  "2John": {
+    "name": "2 John",
+    "bookId": "2JN",
+    "abv": ["2 john", "2 jn", "ii jn", "2jn", "ii jo", "2jo", "ii joh", "2joh", "ii jhn", "2 jhn", "2jhn", "ii john", "2john", "2nd john", "second john"]
+  },
+  "3John": {
+    "name": "3 John",
+    "bookId": "3JN",
+    "abv": ["3 john", "3 jn", "iii jn", "3jn", "iii jo", "3jo", "iii joh", "3joh", "iii jhn", "3 jhn", "3jhn", "iii john", "3john", "3rd john", "third john"]
+  },
+  "Jude": {
+    "name": "Jude",
+    "bookId": "JUD",
+    "abv": ["jude", "jud"]
+  },
+  "Rev": {
+    "name": "Revelation",
+    "bookId": "REV",
+    "abv": ["revelation", "rev", "re", "the revelation"]
+  }
+}
