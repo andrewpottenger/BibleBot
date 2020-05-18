@@ -6,51 +6,63 @@ const bibleMap = require("./bibles.json");
 const booksMap = require("./books.json");
 const version = process.env.BIBLE_VERSION || 'ASV';
 // Book Abbreviations - Taken from https://www.logos.com/bible-book-abbreviations
-const bibleBookAbvRegEx = /\b(1 ch|1 chr|1 chron|1 chronicles|1 co|1 cor|1 corinthians|1 esd|1 esdr|1 esdras|1 jhn|1 jn|1 john|1 kgs|1 ki|1 kings|1 mac|1 macc|1 maccabees|1 pe|1 pet|1 peter|1 pt|1 sa|1 sam|1 samuel|1 sm|1 th|1 thess|1 thessalonians|1 ti|1 tim|1 timothy|1ch|1chr|1chron|1chronicles|1co|1cor|1corinthians|1es|1esd|1esdr|1esdras|1jhn|1jn|1jo|1joh|1john|1k|1kgs|1ki|1kin|1kings|1m|1ma|1mac|1macc|1maccabees|1pe|1pet|1peter|1pt|1s|1sa|1sam|1samuel|1st chronicles|1st corinthians|1st esdras|1st john|1st kgs|1st kings|1st maccabees|1st peter|1st samuel|1st thessalonians|1st timothy|1th|1thes|1thess|1thessalonians|1ti|1tim|1timothy|2 ch|2 chron|2 chronicles|2 co|2 cor|2 corinthians|2 esd|2 esdr|2 esdras|2 jhn|2 jn|2 john|2 kgs|2 ki|2 kings|2 mac|2 macc|2 maccabees|2 pe|2 pet|2 peter|2 pt|2 sa|2 sam|2 samuel|2 sm|2 th|2 thess|2 thessalonians|2 ti|2 tim|2 timothy|2ch|2chr|2chron|2chronicles|2co|2cor|2corinthians|2es|2esd|2esdr|2esdras|2jhn|2jn|2jo|2joh|2john|2k|2kgs|2ki|2kin|2kings|2m|2ma|2mac|2macc|2maccabees|2nd chronicles|2nd corinthians|2nd esdras|2nd john|2nd kgs|2nd kings|2nd maccabees|2nd peter|2nd samuel|2nd thessalonians|2nd timothy|2pe|2pet|2peter|2pt|2s|2sa|2sam|2samuel|2th|2thes|2thess|2thessalonians|2ti|2tim|2timothy|3 jhn|3 jn|3 john|3 mac|3 macc|3 maccabees|3jhn|3jn|3jo|3joh|3john|3ma|3mac|3macc|3rd john|3rd maccabees|4 mac|4 macc|4 maccabees|4ma|4mac|4macc|4maccabees|4th maccabees|ac|acts|add es|add esth|add ps|add psalm|addesth|additional psalm|additions to esther|aes|am|amos|azariah|bar|baruch|bel|bel and the dragon|canticle of canticles|canticles|col|colossians|da|dan|daniel|deut|deuteronomy|dn|dt|ec|ecc|eccles|ecclesiastes|ecclesiasticus|ecclus|ep laod|eph|ephes|ephesians|epist laodiceans|epistle laodiceans|epistle to laodiceans|epistle to the laodiceans|es|esth|esther|ex|exo|exod|exodus|eze|ezek|ezekiel|ezk|ezr|ezra|first chronicles|first corinthians|first esdras|first john|first kgs|first kings|first maccabees|first peter|first samuel|first thessalonians|first timothy|fourth maccabees|ga|gal|galatians|ge|gen|genesis|gn|hab|habakkuk|hag|haggai|heb|hebrews|hg|ho|hos|hosea|i ch|i chr|i chron|i chronicles|i co|i cor|i corinthians|i es|i esd|i esdr|i esdras|i jhn|i jn|i jo|i joh|i john|i kgs|i ki|i kings|i ma|i mac|i macc|i maccabees|i pe|i pet|i peter|i pt|i sa|i sam|i samuel|i th|i thes|i thess|i thessalonians|i ti|i tim|i timothy|ii ch|ii chr|ii chron|ii chronicles|ii co|ii cor|ii corinthians|ii es|ii esd|ii esdr|ii esdras|ii jhn|ii jn|ii jo|ii joh|ii john|ii kgs|ii ki|ii kings|ii ma|ii mac|ii macc|ii maccabees|ii pe|ii pet|ii peter|ii pt|ii sa|ii sam|ii samuel|ii th|ii thes|ii thess|ii thessalonians|ii ti|ii tim|ii timothy|iii jhn|iii jn|iii jo|iii joh|iii john|iii ma|iii mac|iii macc|iii maccabees|iiii maccabees|is|isa|isaiah|iv ma|iv mac|iv macc|iv maccabees|james|jas|jb|jdg|jdgs|jdt|jdth|je|jer|jeremiah|jg|jhn|jl|jm|jn|jnh|job|joe|joel|john|jon|jonah|jos|josh|joshua|jr|jsh|jth|jud|jude|judg|judges|judith|la|lam|lamentations|laod|laodiceans|le|let jer|letter of jeremiah|lev|leviticus|lje|lk|ltr jer|luk|luke|lv|mal|malachi|mark|matt|matthew|mic|micah|mk|ml|mr|mrk|mt|na|nah|nahum|nb|ne|neh|nehemiah|nm|nu|num|numbers|ob|obad|obadiah|ode|phil|philem|philemon|philippians|phm|php|pma|pr|pr az|pr man|pr of man|prayer of azariah|prayer of manasseh|prayer of manasses|prov|proverbs|prv|ps|ps sol|ps solomon|psa|psalm|psalms|psalms of solomon|psalms solomon|pslm|psm|pss|pssol|qoh|qoheleth|re|rest of esther|rev|revelation|rm|ro|rom|romans|rth|ru|ruth|second chronicles|second corinthians|second esdras|second john|second kgs|second kings|second maccabees|second peter|second samuel|second thessalonians|second timothy|sir|sirach|so|song|song of solomon|song of songs|song of the three holy children|song of thr|song of three|song of three children|song of three jews|song of three youths|song thr|sos|sus|susanna|tb|the rest of esther|the revelation|the song of the three holy children|the song of three jews|the song of three youths|third john|third maccabees|tit|titus|tob|tobit|wis|wisd of sol|wisdom|wisdom of solomon|ws|zc|zec|zech|zechariah|zep|zeph|zephaniah|zp)\b/i;
+const bibleBookAbvRegEx = /\b(genesis|gen|ge|gn|exodus|exo|ex|exod|leviticus|lev|le|lv|numbers|num|nu|nm|nb|deuteronomy|deut|dt|joshua|josh|jos|jsh|judges|judg|jdg|jg|jdgs|ruth|rth|ru|1 samuel|1 sam|1 sa|1samuel|1s|i sa|1 sm|1sa|i sam|1sam|i samuel|1st samuel|first samuel|2 samuel|2 sam|2 sa|2s|ii sa|2 sm|2sa|ii sam|2sam|ii samuel|2samuel|2nd samuel|second samuel|1 kings|1 kgs|1 ki|1k|i kgs|1kgs|i ki|1ki|i kings|1kings|1st kgs|1st kings|first kings|first kgs|1kin|2 kings|2 kgs|2 ki|2k|ii kgs|2kgs|ii ki|2ki|ii kings|2kings|2nd kgs|2nd kings|second kings|second kgs|2kin|1 chronicles|1 chron|1 ch|i ch|1ch|1 chr|i chr|1chr|i chron|1chron|i chronicles|1chronicles|1st chronicles|first chronicles|2 chronicles|2 chron|2 ch|ii ch|2ch|ii chr|2chr|ii chron|2chron|ii chronicles|2chronicles|2nd chronicles|second chronicles|ezra|ezra|ezr|nehemiah|neh|ne|esther|esth|es|job|jb|psalm|pslm|ps|psalms|psa|psm|pss|proverbs|prov|pr|prv|ecclesiastes|eccles|ec|ecc|qoh|qoheleth|song of solomon|song|so|canticle of canticles|canticles|song of songs|sos|isaiah|isa|is|jeremiah|jer|je|jr|lamentations|lam|la|ezekiel|ezek|eze|ezk|daniel|dan|da|dn|hosea|hos|ho|joel|joe|jl|amos|am|obadiah|obad|ob|jonah|jnh|jon|micah|mic|nahum|nah|na|habakkuk|hab|hab|zephaniah|zeph|zep|zp|haggai|hag|hg|zechariah|zech|zec|zc|malachi|mal|mal|ml|matthew|matt|mt|mark|mrk|mk|mr|luke|luk|lk|john|jn|jhn|acts|ac|romans|rom|ro|rm|1 corinthians|1 cor|1 co|i co|1co|i cor|1cor|i corinthians|1corinthians|1st corinthians|first corinthians|2 corinthians|2 cor|2 co|ii co|2co|ii cor|2cor|ii corinthians|2corinthians|2nd corinthians|second corinthians|galatians|gal|ga|ephesians|ephes|eph|philippians|phil|php|colossians|col|col|1 thessalonians|1 thess|1 th|i th|1th|i thes|1thes|i thess|1thess|i thessalonians|1thessalonians|1st thessalonians|first thessalonians|2 thessalonians|2 thess|2 th|ii th|2th|ii thes|2thes|ii thess|2thess|ii thessalonians|2thessalonians|2nd thessalonians|second thessalonians|1 timothy|1 tim|1 ti|i ti|1ti|i tim|1tim|i timothy|1timothy|1st timothy|first timothy|2 timothy|2 tim|2 ti|ii ti|2ti|ii tim|2tim|ii timothy|2timothy|2nd timothy|second timothy|titus|tit|philemon|philem|phm|hebrews|heb|james|jas|jm|1 peter|1 pet|1 pe|i pe|1pe|i pet|1pet|i pt|1 pt|1pt|i peter|1peter|1st peter|first peter|2 peter|2 pet|2 pe|ii pe|2pe|ii pet|2pet|ii pt|2 pt|2pt|ii peter|2peter|2nd peter|second peter|1 john|1 jn|i jn|1jn|i jo|1jo|i joh|1joh|i jhn|1 jhn|1jhn|i john|1john|1st john|first john|2 john|2 jn|ii jn|2jn|ii jo|2jo|ii joh|2joh|ii jhn|2 jhn|2jhn|ii john|2john|2nd john|second john|3 john|3 jn|iii jn|3jn|iii jo|3jo|iii joh|3joh|iii jhn|3 jhn|3jhn|iii john|3john|3rd john|third john|jude|jud|revelation|rev|re|the revelation)\b/i;
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
+// return Bible version ID for API call
 const getBibleVersionId = function() {
   const bibleVersionId = (bibleMap[version] && bibleMap[version].id) ? bibleMap[version].id : new Error('This version is not supported');
   return bibleVersionId;
 }
 
+// Bible verseion abbreviation
 const getBibleVersionAbv = function() {
   const bibleVersionAbv = (bibleMap[version] && bibleMap[version].abbreviationLocal) ? bibleMap[version].abbreviationLocal : new Error('This version is not supported');
   return bibleVersionAbv;
 }
 
-//link e.g. https://www.biblegateway.com/passage/?search=john.1.16&version=ASV
+// Biblegateway Link e.g. https://www.biblegateway.com/passage/?search=john.1.16&version=ASV
 const getReferenceLink = function(verse) {
   return `https://biblegateway.com/bible?passage=${verse}&version=${version}`;
 }
 
+// OSIS Verse Reference
+// Parser repo: https://github.com/openbibleinfo/Bible-Passage-Reference-Parser
+// Parser demo: https://www.openbible.info/labs/reference-parser/
 // verse formats supported:
-// osis: "John.1",
-// osis: "John.1.1",
-// osis: "John.1.1-John.1.2",
-// TODO: osis: "John.1.1,John.1.3",
+// - osis: "John.1"
+// - osis: "John.1.1"
+// - osis: "John.1.1-John.1.2"
+// - osis: "John.1.1,John.1.3"
 const getVerseRef = function(message) {
   if (!message) return;
-  // parse reference https://github.com/openbibleinfo/Bible-Passage-Reference-Parser
-  // osis verse reference parser demo https://www.openbible.info/labs/reference-parser/
+  let verseRef;
   const result = parseQuery(message.text);
   if (!result || !result.components) return;
-  const verseRefList = result.components.filter(function(component) {
+  const verseList = result.components.filter(function(component) {
     return component.type === 'osis';
   });
 
-  const verseRef = verseRefList[0] && verseRefList[0].osis;
+  if (verseList.length > 1 ){
+    var multiVerseRef = [];
+    verseList.forEach(function(verse) {
+      multiVerseRef.push(verse.osis);
+    });
+    verseRef = multiVerseRef.join(',');
+  } else {
+    verseRef = verseList[0] && verseList[0].osis;
+  }
+
   if (!verseRef) return;
   return verseRef;
 }
 
+// return an array from a single verse reference e.g. John.1.1 -> [John, 1, 1]
 const getVerseArray = function(verseRef) {
-  // TODO: support chapter or multi-verse reference
-  // split to ensure single verse instead of chapter or multi-verse reference, which is supported by osis but not the bot atm
   const verseArr = verseRef && verseRef.split('.');
 
   // check for a full verse reference
@@ -61,7 +73,7 @@ const getVerseArray = function(verseRef) {
 // formats a single verse key to map to API keys
 const formatVerseForAPI = function(singleVerse) {
   const verseArr = getVerseArray(singleVerse);
-  // prepare API for call based on input, always show the first verse, , provide link to full scrpture
+  // prepare API for call based on input, always show the first verse, , provide link to full scripture
   // 1: ... book (chapter 1)
   // 2: ... book chapter (1)
   // 3: book chapter:verse
@@ -82,6 +94,7 @@ const formatVerseForAPI = function(singleVerse) {
   return formattedVerseRef;
 }
 
+// formate single verse reference e.g. John1.1 -> John 1:1
 const formatSingleVerseForLink = function(singleVerseRef) {
   const verseArr = getVerseArray(singleVerseRef);
   const book = booksMap[verseArr[0]] && booksMap[verseArr[0]].name ? booksMap[verseArr[0]].name : null;
@@ -98,36 +111,59 @@ const formatSingleVerseForLink = function(singleVerseRef) {
   return `${book} ${chapter}${colon}${verse}`;
 }
 
+// handle multi verse and single verse references
 // verse formats supported:
-// osis: "John.1",
-// osis: "John.1.1",
-// osis: "John.1.1-John.1.2",
-// TODO: osis: "John.1.1,John.1.3",
+// osis: "John.1" -> [John.1]
+// osis: "John.1.1" -> [John.1.1]
+// osis: "John.1.1-John.1.2" -> [John.1.1, John.1.2]
+// osis: "John.1.1,John.1.3" -> [John.1.1, John.1.3]
+const getVersesArray = function(verseRef) {
+  let verseArr = [];
+
+  if (verseRef.indexOf('-') !== -1) {
+    verseArr = verseRef && verseRef.split('-');
+  } else if (verseRef.indexOf(',') !== -1) {
+    verseArr = verseRef && verseRef.split(',');
+  } else {
+    verseArr.push(verseRef);
+  }
+
+  return verseArr;
+}
+
+// format verse reference for link
 const getDisplayVerse = function(verseRef) {
   const verseAbv = getBibleVersionAbv();
-  const verseArr = verseRef.split('-');
-  var displayText = '';
+  let displayText = '';
+  const verseArr = getVersesArray(verseRef);
 
   if (verseArr.length > 1) {
     var displayArr = [];
     verseArr.forEach(function(verse) {
       displayArr.push(formatSingleVerseForLink(verse));
     });
-    displayText = displayArr.join('-')
+
+    if (verseRef.indexOf('-') !== -1) {
+      displayText = displayArr.join('-');
+    } else if (verseRef.indexOf(',') !== -1) {
+      displayText = displayArr.join(',');
+    }
+
   } else {
     displayText = formatSingleVerseForLink(verseArr[0]);
   }
   return  `${displayText} (${verseAbv})`;
 }
 
+// request verse from API, respond with a verse with a reference link
 const getVerse = function(message, say) {
   const versionId = getBibleVersionId();
   const verseRef = getVerseRef(message);
-  if (!verseRef) return;
-  // use the first verse for request to keep count low, provide link to full scrpture
-  const versesRefArr = verseRef && verseRef.split('-');
-  const singleVerseRef = versesRefArr[0];
-  if (!singleVerseRef[0]) return;
+  if (!verseRef) return
+  const verseArr = getVersesArray(verseRef);
+
+  const singleVerseRef = verseArr[0];
+  if (!singleVerseRef) return;
 
   // formats a single verse key to map to API keys
   const verseForAPI = formatVerseForAPI(singleVerseRef);
@@ -145,7 +181,7 @@ const getVerse = function(message, say) {
       const rawVerseContent = results.data.content;
       if (!rawVerseContent) return;
       const verse = rawVerseContent.trim();
-      const verseEnd = (verseRef.split('.').length < 3 || versesRefArr.length > 1) ? '...\n :book: ' : '\n:book: ';
+      const verseEnd = (verseRef.split('.').length < 3 || verseArr.length > 1) ? '...\n :book: ' : '\n:book: ';
 
       if (verse) {
         const refLink = getReferenceLink(verseRef);
