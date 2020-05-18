@@ -259,6 +259,107 @@ app.error((error) => {
   console.error(error);
 });
 
+app.event('app_home_opened', async ({ event, context }) => {
+  try {
+    /* view.publish is the method that your app uses to push a view to the Home tab */
+    const result = await app.client.views.publish({
+
+      /* retrieves your xoxb token from context */
+      token: context.botToken,
+
+      /* the user that opened your app's app home */
+      user_id: event.user,
+
+      /* the view payload that appears in the app home*/
+      view: {
+        type: 'home',
+        callback_id: 'home_view',
+
+        /* body of the view */
+        blocks: [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Welcome to the BibleBot :latin_cross:*"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "The *BibleBot* sends scripture to any references in your messages. You can type any verse reference and the *BibleBot* will reply with a snippet of that verse and a link to longer verse text. Here are some examples:"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*:dagger_knife: Single Verse*: John 3:16"
+            }
+          },
+
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*:crossed_swords: Consecutive Verses*: Matthew 28:18-20"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*:hammer_and_wrench: Non-Consecutive Verse*: John 11:33,35"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*:book: Entire Chapters*: John 1"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*:fire: Book abbreviations*: Phil 4:13"
+            }
+          },
+              {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*:raised_hands: Versions ASV or KJV*: Phil 4:13 KJV"
+            }
+          },
+              {
+            "type": "image",
+            "image_url": "https://raw.githubusercontent.com/andrewpottenger/BibleBot/master/examples/BibleBot-interaction.png",
+            "alt_text": "example of John 3:16"
+          },
+              {
+            "type": "context",
+            "elements": [
+              {
+                "type": "mrkdwn",
+                "text": "*Reference:*  https://github.com/andrewpottenger/BibleBot"
+              }
+            ]
+          }
+        ]
+      }
+    });
+  }
+  catch (error) {
+    console.error(error);
+  }
+});
+
 (async () => {
   // Start your app
   await app.start(process.env.PORT || 3000);
