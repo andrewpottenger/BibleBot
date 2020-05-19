@@ -46,11 +46,11 @@ $ cp .env-example .env
 ### Configure
 
 ```shell
-SLACK_BOT_TOKEN=xoxb...8WRqKWx
-SLACK_SIGNING_SECRET=f345....6789
-BIBLE_API_KEY=fbdasfsdsd.....asdcadsasd
-BIBLE_VERSION=ASV
-PORT=3000
+SLACK_BOT_TOKEN= # your Slack workplace setup
+SLACK_SIGNING_SECRET= # your Slack workplace setup
+BIBLE_API_KEY= # from https://scripture.api.bible/
+BIBLE_VERSION= # ASV or KJV
+port= # pick a port
 ```
 ### Run
 
