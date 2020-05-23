@@ -2,10 +2,9 @@
 The **BibleBot** sends scripture to any references in your messages. You can type any verse reference and the BibleBot will reply with a snippet of that verse and a link to longer verse text. Below are some examples.
 
 ## Usage
-
-> /bible [reference]
-
-- `/bible John 3:16` - Returns the reference verse and link
+### Type any scripture reference
+> Hi group, mediate on John 3:16 this week
+![BibleBot John 3:16 example](https://raw.githubusercontent.com/andrewpottenger/BibleBot/master/examples/John-3-16-example.png)
 
 ### Supported scripture references
 - :pray: **Single Verse:** type `John 3:16`
@@ -26,6 +25,10 @@ genesis,gen,ge,gn,exodus,exo,ex,exod,leviticus,lev,le,lv,numbers,num,nu,nm,nb,de
 ### Supported `/bible` command
 
 With the a `/bible` slash command, you request any scripture.
+
+> /bible [reference]
+
+- `/bible John 3:16` - Returns the reference verse and link
 
 ## Example:
 ![BibleBot example interactions](https://raw.githubusercontent.com/andrewpottenger/BibleBot/master/examples/BibleBot-interaction.png)
