@@ -3,7 +3,8 @@ The **BibleBot** sends scripture to any references in your messages. You can typ
 
 ## Usage
 ### Type any scripture reference
-> Hi group, mediate on John 3:16 this week
+> Hi group, mediate on _John 3:16_ this week
+
 ![BibleBot John 3:16 example](https://raw.githubusercontent.com/andrewpottenger/BibleBot/master/examples/John-3-16-example.png)
 
 ### Supported scripture references
